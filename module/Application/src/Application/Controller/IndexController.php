@@ -50,7 +50,25 @@ class IndexController extends AbstractActionController
 	
     public function indexAction()
     {
-        return new ViewModel();
+        if (null === $this->_loginmodel) {
+            $this->_getLoginModel();
+        }
+	$loginDetails=$this->_loginmodel->getAll();
+	
+	
+	$layout = $this->layout();
+  	$layout->setTemplate('layout/layout');
+
+	
+	$viewModel = new ViewModel(array(
+			'logindetails'=>$loginDetails
+		
+     ));
+	$viewModel->setTemplate('application/users/users.phtml');
+		
+	return $viewModel;
+		
+     return new ViewModel();
     }
 	
 	public function usersAction()

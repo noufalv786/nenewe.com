@@ -1,44 +1,205 @@
-<div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Welcome to %sZend Framework 2%s'), '<span class="zf-green">', '</span>') ?></h1>
-    <p><?php echo sprintf($this->translate('Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2.'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p>
-    <p><a class="btn btn-success btn-lg" href="https://github.com/zendframework/zf2" target="_blank"><?php echo $this->translate('Fork Zend Framework 2 on GitHub') ?> &raquo;</a></p>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+					<div class="middile-wrapper">
+						<h2>User Details</h2>
+					</div>
+					<div class="right-add-user-wrapper">
+						<div class="add-wrapper">
+						<a href="#" id="useraddbtn"><i class="fa fa-user-plus" aria-hidden="true">Add</i></a>
+						</div>
+					
+					</div>
+				
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+								<th><span>SlNo</span></th>
+                                <th><span>Name</span></th>
+                                <th><span>Email</span></th>
+								<th><span>Phone</span></th>
+                             
+                                <th><span>Password</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+							<?php $row=1;foreach($logindetails as $record) { ?>
+                                <tr>
+								   <td>
+                                   <a href="#" ><?=$row;?></a>
+								   </td>
+                                    <td>
+                                       <!-- <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">-->
+                                        <a href="#" ><?=$record['name']; ?></a>
+                                       
+                                    </td>
+									<td>
+                                   <a href="#" ><?=$record['email_id'];?></a>
+								   </td>
+                                  
+									<td>
+                                   <a href="#" > <?=$record['phone'];?></a>
+								   </td>
+								     <td>
+                                   <a href="#" > <?=$record['password'];?></a>
+								   </td>
+                                    
+                                    <td style="width: 20%;">
+                                       
+                                        <a href="#" class="table-link edit-user" id="<?=$record['email_id'];?>">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger delete-user" id="<?=$record['email_id'];?>">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+							<?php $row++; } ?>
+                           
+                      
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!'), '<a href="http://framework.zend.com/wiki/display/ZFDEV2/Home">', '</a>', '<a href="http://framework.zend.com/zf2/blog">', '</a>', '<a href="https://github.com/zendframework/zf2/issues">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
-            </div>
-        </div>
+
+<!--Add user Modal -->
+<div id="adduserModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+		<div class="modal-custom-content">
+		
+			
+			
+		<div class="panel panel-primary">
+			<div class="panel-heading">Enter Your Details Here
+			</div>
+			<div class="panel-body">
+				<form name="useraddfm" id="useraddfm" method="post">
+					<div class="form-group">
+						<label for="myName">Name *</label>
+						<input id="name" name="name" class="form-control" type="text" data-validation="required">
+						<span id="error_name" class="text-danger"></span>
+					</div>
+				
+					<div class="form-group">
+						<label for="age">Email *</label>
+						<input id="email" name="email"  class="form-control" type="text" data-validation="required" >
+						<span id="error_email" class="text-danger"></span>
+					</div>
+			
+					<div class="form-group">
+						<label for="phone">Phone Number *</label>
+						<input type="text" id="phone" name="phone" class="form-control" >
+						<span id="error_phone" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+						<label for="phone">Password *</label>
+						<input type="text" id="password" name="password" class="form-control" data-validation="required">
+						<span id="error_password" class="text-danger"></span>
+					</div>
+				
+					
+					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Submit</button>
+			
+				</form>
+
+			
+	</div>
+		
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Discover Modules') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2.'), '<a href="https://github.com/zendframework/modules.zendframework.com">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Explore ZF2 Modules') ?> &raquo;</a></p>
-            </div>
-        </div>
+  </div>
+</div>
+
+</div>
+
+<!--Edit user Modal -->
+<div id="edituserModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+		<div class="modal-custom-content">
+		
+			
+			
+		<div class="panel panel-primary">
+			<div class="panel-heading">Enter Your Details Here
+			</div>
+			<div class="panel-body">
+				<form name="edituserfm" id="edituserfm" method="post">
+					<div class="form-group">
+						<label for="myName">Name *</label>
+						<input id="editname" name="name" class="form-control" type="text" data-validation="required">
+						<span id="edit_error_name" class="text-danger"></span>
+					</div>
+				
+					<div class="form-group">
+						<label for="age">Email *</label>
+						<input id="editemail" name="email"  readonly class="form-control" type="text" data-validation="required" >
+						<span id="edit_error_email" class="text-danger"></span>
+					</div>
+			
+					<div class="form-group">
+						<label for="phone">Phone Number *</label>
+						<input type="text" id="editphone" name="phone" class="form-control" >
+						<span id="edit_error_phone" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group">
+						<label for="phone">Password *</label>
+						<input type="text" id="editpassword" name="password" class="form-control" data-validation="required">
+						<span id="edit_error_password" class="text-danger"></span>
+					</div>
+				
+					
+					<button id="updateuserbtn" type="submit" value="submit" class="btn btn-primary center">Update</button>
+				
+				</form>
+
+			
+	</div>
+		
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Help &amp; Support') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s.'), '<a href="irc://irc.freenode.net/zftalk">', '</a>', '<a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank"><?php echo $this->translate('Ping us on IRC') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
+  </div>
+</div>
 </div>
